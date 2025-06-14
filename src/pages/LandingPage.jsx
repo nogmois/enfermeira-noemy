@@ -86,7 +86,10 @@ export default function LandingPage() {
         <Content>
           {/* HERO */}
           <section
-            style={{ background: colors.sectionBg, padding: "40px 20px" }}
+            style={{
+              background: colors.sectionBg,
+              padding: isMobile ? "0 20px" : "40px 20px",
+            }}
           >
             {isMobile ? (
               <>
@@ -201,8 +204,64 @@ export default function LandingPage() {
             )}
           </section>
 
+          {/* SERVIÇOS */}
+          <section style={{ padding: "20px 20px" }}>
+            <div style={containerStyle}>
+              <Title
+                level={3}
+                style={{
+                  color: colors.primary,
+                  textAlign: "center",
+                  marginBottom: 24,
+                }}
+              >
+                Serviços oferecidos
+              </Title>
+              <Paragraph
+                style={{
+                  textAlign: "center",
+                  maxWidth: 600,
+                  margin: "0 auto 32px",
+                }}
+              >
+                Sessões personalizadas para entender seu corpo, equilibrar
+                hormônios e viver seu ciclo com mais qualidade de vida.
+              </Paragraph>
+              <Row gutter={[16, 16]} justify="center">
+                {[
+                  {
+                    title: "Ginecologia Natural",
+                    desc: "Fitoterapia e métodos naturais para equilíbrio hormonal.",
+                  },
+                  {
+                    title: "Planejamento Familiar",
+                    desc: "Métodos seguros sem hormônio para engravidar ou espaçar gestações.",
+                  },
+                  {
+                    title: "Cuidados Íntimos",
+                    desc: "Orientações e prevenção para conforto e saúde íntima.",
+                  },
+                ].map((item) => (
+                  <Col key={item.title} xs={24} sm={12} md={8}>
+                    <Card
+                      title={item.title}
+                      hoverable
+                      style={{
+                        borderRadius: 8,
+                        boxShadow,
+                        background: colors.cardBg,
+                      }}
+                    >
+                      <Text>{item.desc}</Text>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          </section>
+
           {/* INSTAGRAM */}
-          <section style={{ padding: "60px 20px" }}>
+          <section style={{ padding: "20px 20px" }}>
             <div style={containerStyle}>
               <Title
                 level={3}
@@ -274,7 +333,7 @@ export default function LandingPage() {
 
           {/* DEPOIMENTOS */}
           <section
-            style={{ background: colors.sectionBg, padding: "60px 20px" }}
+            style={{ background: colors.sectionBg, padding: "20px 20px" }}
           >
             <div style={containerStyle}>
               <Title
@@ -324,65 +383,9 @@ export default function LandingPage() {
             </div>
           </section>
 
-          {/* SERVIÇOS */}
-          <section style={{ padding: "60px 20px" }}>
-            <div style={containerStyle}>
-              <Title
-                level={3}
-                style={{
-                  color: colors.primary,
-                  textAlign: "center",
-                  marginBottom: 24,
-                }}
-              >
-                Serviços oferecidos
-              </Title>
-              <Paragraph
-                style={{
-                  textAlign: "center",
-                  maxWidth: 600,
-                  margin: "0 auto 32px",
-                }}
-              >
-                Sessões personalizadas para entender seu corpo, equilibrar
-                hormônios e viver seu ciclo com mais qualidade de vida.
-              </Paragraph>
-              <Row gutter={[16, 16]} justify="center">
-                {[
-                  {
-                    title: "Ginecologia Natural",
-                    desc: "Fitoterapia e métodos naturais para equilíbrio hormonal.",
-                  },
-                  {
-                    title: "Planejamento Familiar",
-                    desc: "Métodos seguros sem hormônio para engravidar ou espaçar gestações.",
-                  },
-                  {
-                    title: "Cuidados Íntimos",
-                    desc: "Orientações e prevenção para conforto e saúde íntima.",
-                  },
-                ].map((item) => (
-                  <Col key={item.title} xs={24} sm={12} md={8}>
-                    <Card
-                      title={item.title}
-                      hoverable
-                      style={{
-                        borderRadius: 8,
-                        boxShadow,
-                        background: colors.cardBg,
-                      }}
-                    >
-                      <Text>{item.desc}</Text>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          </section>
-
           {/* LOCALIZAÇÃO */}
           <section
-            style={{ background: colors.sectionBg, padding: "60px 20px" }}
+            style={{ background: colors.sectionBg, padding: "20px 20px" }}
           >
             <div style={containerStyle}>
               <Title
