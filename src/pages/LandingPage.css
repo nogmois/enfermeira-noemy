@@ -8,3 +8,7 @@
   background: none !important;
   border: none !important;
 }
+
+.swiper-slide {
+  padding: 0 8px;
+}

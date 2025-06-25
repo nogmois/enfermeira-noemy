@@ -17,6 +17,10 @@ import {
   StarFilled,
   ClockCircleOutlined,
 } from "@ant-design/icons";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+
 import heroImage from "../assets/imagem.jpg";
 
 import img1 from "../assets/img1.jpg";
@@ -167,7 +171,12 @@ export default function LandingPage() {
                   />
                 </div>
 
-                <div style={{ textAlign: "center", padding: "0 10px" }}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "0 10px",
+                  }}
+                >
                   <Title
                     level={3}
                     style={{
@@ -195,6 +204,7 @@ export default function LandingPage() {
                     href={whatsappLink}
                     target="_blank"
                     style={{ padding: "0 32px" }}
+                    marginBottom="8px"
                   >
                     Agendar agora
                   </Button>
@@ -393,13 +403,6 @@ export default function LandingPage() {
           </section>
 
           {/* DEPOIMENTOS */}
-          <style>{`
-  @keyframes scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-`}</style>
-
           <section style={{ background: colors.sectionBg, padding: "20px 0" }}>
             <div style={containerStyle}>
               <Title
@@ -413,51 +416,45 @@ export default function LandingPage() {
                 Depoimentos inspiradores
               </Title>
 
-              <div
-                style={{
-                  overflow: "hidden",
-                  height: 200, // altura fixa para caber o card
+              <Swiper
+                modules={[Autoplay]}
+                breakpoints={{
+                  0: { slidesPerView: 1 },
+                  768: { slidesPerView: 2 },
+                  1024: { slidesPerView: 3 },
                 }}
+                spaceBetween={16}
+                loop
+                autoplay={{ delay: 2500, disableOnInteraction: false }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    /* margem negativa para “puxar” o último espaço */
-                    marginRight: -CARD_MARGIN,
-                    /* animação mais rápida e linear */
-                    animation: `scroll ${ANIMATION_DURATION} linear infinite`,
-                  }}
-                >
-                  {[...testimonials, ...testimonials].map(
-                    ({ name, quote, rating }, idx) => (
-                      <Card
-                        key={idx}
-                        bordered={false}
-                        style={{
-                          boxShadow,
-                          borderRadius: 8,
-                          width: CARD_WIDTH,
-                          marginRight: CARD_MARGIN,
-                          flex: "0 0 auto",
-                        }}
-                      >
-                        <Space direction="vertical">
-                          <Text italic>"{quote}"</Text>
-                          <Space>
-                            {[...Array(rating)].map((_, i) => (
-                              <StarFilled
-                                key={i}
-                                style={{ color: colors.primary }}
-                              />
-                            ))}
-                          </Space>
-                          <Text strong>- {name}</Text>
+                {testimonials.map(({ name, quote, rating }, idx) => (
+                  <SwiperSlide key={idx}>
+                    <Card
+                      bordered={false}
+                      style={{
+                        boxShadow,
+                        borderRadius: 8,
+                        width: "100%", // faz o card sempre preencher o slide
+                        minHeight: 200, // você pode ajustar esse valor
+                        boxSizing: "border-box",
+                      }}
+                    >
+                      <Space direction="vertical" size="middle">
+                        <Text italic>"{quote}"</Text>
+                        <Space>
+                          {[...Array(rating)].map((_, i) => (
+                            <StarFilled
+                              key={i}
+                              style={{ color: colors.primary }}
+                            />
+                          ))}
                         </Space>
-                      </Card>
-                    )
-                  )}
-                </div>
-              </div>
+                        <Text strong>— {name}</Text>
+                      </Space>
+                    </Card>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </section>
 
