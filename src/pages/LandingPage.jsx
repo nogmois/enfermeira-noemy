@@ -15,6 +15,7 @@ import {
   WhatsAppOutlined,
   InstagramOutlined,
   StarFilled,
+  ClockCircleOutlined,
 } from "@ant-design/icons";
 import heroImage from "../assets/imagem.jpg";
 
@@ -49,7 +50,14 @@ export default function LandingPage() {
   const screens = useBreakpoint();
   const isMobile = !screens.sm;
 
-  const whatsappLink = "https://wa.me/5516996489248";
+  const whatsappMessage = encodeURIComponent(
+    "Olá Dra. Noemy, tudo bem? 👋\n\n" +
+      "Eu gostaria de agendar uma consulta ginecológica.\n" +
+      "Você pode me informar datas e horários disponíveis?\n\n" +
+      "Obrigada!"
+  );
+
+  const whatsappLink = `https://wa.me/5516996489248?text=${whatsappMessage}`;
   const instaProfile = "https://www.instagram.com/dra.noemynogueira/";
 
   const posts = [
@@ -135,14 +143,14 @@ export default function LandingPage() {
             }}
           >
             {isMobile ? (
+              // MOBILE HERO: imagem + texto abaixo
               <>
-                {/* Full-bleed image on mobile */}
                 <div
                   style={{
                     position: "relative",
-                    width: "calc(100%  40px)",
-                    margin: "0 -20px",
-                    height: 320,
+                    width: "calc(100% + 40px)",
+                    margin: "0 -20px 16px", // margem inferior para espaçar o texto
+                    height: 400,
                     borderRadius: 8,
                     overflow: "hidden",
                     boxShadow,
@@ -157,55 +165,43 @@ export default function LandingPage() {
                       objectFit: "cover",
                     }}
                   />
-                  <div
+                </div>
+
+                <div style={{ textAlign: "center", padding: "0 10px" }}>
+                  <Title
+                    level={3}
                     style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      padding: 24,
-                      background:
-                        "linear-gradient(transparent, rgba(0,0,0,0.6))",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      boxSizing: "border-box",
+                      color: colors.primary,
+                      marginBottom: 8,
                     }}
                   >
-                    <Title
-                      level={3}
-                      style={{
-                        color: "#fff",
-                        textAlign: "center",
-                        marginBottom: 8,
-                      }}
-                    >
-                      Seja bem-vinda ao cuidado íntimo e natural
-                    </Title>
-                    <Paragraph
-                      style={{
-                        fontSize: 18,
-                        lineHeight: 1.6,
-                        marginBottom: 24,
-                      }}
-                    >
-                      Sou Noemy Nogueira, enfermeira ginecológica especialista
-                      em Saúde da Mulher, com foco em atendimento humanizado.
-                      Aqui você encontra consultas ginecológicas com qualidade e
-                      escuta qualificada, sem pressa e com muito conforto.
-                    </Paragraph>
-                    <Button
-                      type="primary"
-                      icon={<WhatsAppOutlined />}
-                      href={whatsappLink}
-                      target="_blank"
-                    >
-                      Agendar agora
-                    </Button>
-                  </div>
+                    Seja bem-vinda ao cuidado íntimo e natural
+                  </Title>
+                  <Paragraph
+                    style={{
+                      fontSize: 14,
+                      lineHeight: 1.5,
+                      marginBottom: 16,
+                      color: "#333",
+                    }}
+                  >
+                    Atendimento humanizado em Saúde da Mulher: consultas
+                    ginecológicas com acolhimento, escuta qualificada e sem
+                    pressa.
+                  </Paragraph>
+                  <Button
+                    type="primary"
+                    icon={<WhatsAppOutlined />}
+                    href={whatsappLink}
+                    target="_blank"
+                    style={{ padding: "0 32px" }}
+                  >
+                    Agendar agora
+                  </Button>
                 </div>
               </>
             ) : (
+              // DESKTOP HERO (sem mudanças)
               <div style={containerStyle}>
                 <Row gutter={32} align="middle" wrap={false}>
                   <Col flex="0 0 40%">
@@ -248,6 +244,45 @@ export default function LandingPage() {
                 </Row>
               </div>
             )}
+          </section>
+
+          {/* CREDIBILIDADE */}
+          <section style={{ padding: "20px 0" }}>
+            <Row gutter={16} justify="center" style={{ margin: "32px 0" }}>
+              {[
+                {
+                  icon: (
+                    <StarFilled
+                      style={{ fontSize: 24, color: colors.primary }}
+                    />
+                  ),
+                  label: "5/5 satisfação",
+                },
+                {
+                  icon: (
+                    <ClockCircleOutlined
+                      style={{ fontSize: 24, color: colors.primary }}
+                    />
+                  ),
+                  label: "60 min sem pressa",
+                },
+                {
+                  icon: (
+                    <EnvironmentOutlined
+                      style={{ fontSize: 24, color: colors.primary }}
+                    />
+                  ),
+                  label: "Franca - SP",
+                },
+              ].map((item) => (
+                <Col key={item.label} xs={8} style={{ textAlign: "center" }}>
+                  <Space direction="vertical" size={4}>
+                    {item.icon}
+                    <Text strong>{item.label}</Text>
+                  </Space>
+                </Col>
+              ))}
+            </Row>
           </section>
 
           {/* SERVIÇOS */}
